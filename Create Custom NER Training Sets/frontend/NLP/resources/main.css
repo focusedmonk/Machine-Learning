@@ -1,0 +1,79 @@
+.x-body,
+.x-panel-body-default {
+    font-size: 11px !important;
+    font-weight: 400 !important;
+}
+
+.x-panel-header {
+    padding: 5px !important;
+}
+
+.x-title-text {
+    font-size: 15px;
+}
+
+.annotation-sentence {
+    /* display: block; */
+    padding-bottom: 15px;
+    border-bottom: 1.5px solid #eae4e4;
+}
+
+.empty-text {
+    text-align: center;
+    font-weight: 15px
+}
+
+.annotate-panel {
+    padding: 5px 25px;
+    line-height: 23px;
+    white-space: pre-wrap;
+    /* text-align: justify; */
+}
+
+.annotation-enabled {
+    font-weight: 600;
+    border-radius: 7px;
+    padding: 1px 4px;
+    background-color: #ecff55;
+    display: inline-block;
+    margin: 2px;
+}
+
+.remove-annotation {
+    position: absolute;
+    margin: -7px 0px;
+    cursor: pointer;
+}
+
+.annotation-entity {
+    color: #2900ec;
+    font-size: 12px;
+    font-weight: bold;
+    font-family: "Roboto Condensed", "Arial Narrow", sans-serif;
+    margin-left: 8px;
+    text-transform: uppercase;
+}
+
+.entity-label-panel {
+    border-top: 2px solid #ccc;
+    border-bottom: 2px solid #ccc;
+}
+
+.entity-label-panel .x-panel-body {
+    padding: 5px 25px;
+}
+
+.entity-label {
+    padding: 3px 5px;
+    margin: 3px !important;
+    border: 1px solid #583fcf;
+    border-radius: 5px;
+    cursor: pointer;
+    display: inline-block;
+    font-size: 13px;
+}
+
+.entity-selected {
+    background: #583fcf;
+    color: #fff;
+}
