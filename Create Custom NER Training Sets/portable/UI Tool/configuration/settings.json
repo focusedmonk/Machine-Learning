@@ -1,0 +1,23 @@
+{
+	"LocalAppDirectory": "<Absolute Path>\\Create Custom NER Training Sets\\portable\\NLP\\index.html",
+	"OpenDevToolsOnAppLaunch": true,
+	"AjaxHeaders": {
+		"Request": {
+			"Origin": ""
+		},
+		"Response": {
+			"Access-Control-Allow-Origin": "*"
+		}
+	},
+	"__COMMENT#1__": "Below are the advanced configurations for electron. Please be sure before making any changes.",
+	"ElectronCommandLineArgs": [
+        "--disable-web-security",
+        "--unsafely-treat-insecure-origin-as-secure",
+        "--disable-http-cache"
+    ],
+    "CommandLineSwitch": [
+        "disable-http-cache",
+        "disable-web-security",
+        "disable-site-isolation-trials"
+    ]
+}
