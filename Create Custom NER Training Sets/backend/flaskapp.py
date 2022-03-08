@@ -14,12 +14,14 @@ CORS(app)
 
 settings = read_json_file('../Settings.json')
 use_cols = settings['UseCols']
+excel_filename = os.path.basename(settings['ExcelData']).split('.')[0]
+db_filename = settings['DbName'] if settings['DbName'] else excel_filename
 if len(use_cols) == 0:
     df = pd.read_excel(settings['ExcelData'], engine='openpyxl', sheet_name=settings['SheetName'])
     use_cols = list(df.columns)
 
 # Setting up database
-engine = create_engine('sqlite:///' + settings['DbName'], echo=False)
+engine = create_engine(f'sqlite:///{db_filename}.db', echo=False)
 insp = inspect(engine)
 metadata = MetaData(engine)
 table_args = ['annotation', metadata, Column('index', Integer()), Column('unique_id', String())]
@@ -122,6 +124,8 @@ def create_training_data():
             f.write(json.dumps(annot_bin))
     return 'Success'
 
+if not insp.has_table('annotation'):
+    load_db()
 
 if __name__ == '__main__':
     app.run(port=settings['PyPort'])

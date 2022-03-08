@@ -1,11 +1,11 @@
 {
-    "ExcelData": "<Absolute Path>\\Create Custom NER Training Sets\\data\\Raw Data.xlsx",
+    "ExcelData": "<Absolute Path>\\Create Custom NER Training Sets\\portable\\data\\Raw Data.xlsx",
     "SheetName": "Sheet1",
     "UseCols": [],
     "AnnotationColumn": "Sample Text",
     "DbName": "",
-    "TrainingInputPath": "<Absolute Path>\\Create Custom NER Training Sets\\data\\Train_",
-    "TrainingOutputPath": "<Absolute Path>\\Create Custom NER Training Sets\\data",
+    "TrainingInputPath": "<Absolute Path>\\Create Custom NER Training Sets\\portable\\data\\Train_",
+    "TrainingOutputPath": "<Absolute Path>\\Create Custom NER Training Sets\\portable\\data",
     "PyPort": 2020,
     "EntityLabels": []
 }

@@ -5,7 +5,7 @@
 	"main": "main.js",
 	"scripts": {
 		"start": "electron .",
-		"package-app": "electron-packager . \"UI Tool\" --platform=win32 --asar --prune --overwrite --arch=x64 --out build/"
+		"package-app": "electron-packager . \"UI Tool\" --platform=win32 --asar --prune --overwrite --arch=x64 --out .././"
 	},
 	"author": "Nandeesh N",
 	"license": "ISC",
