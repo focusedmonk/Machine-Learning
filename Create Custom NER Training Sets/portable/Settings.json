@@ -3,11 +3,9 @@
     "SheetName": "Sheet1",
     "UseCols": [],
     "AnnotationColumn": "Sample Text",
-    "DbName": "annotation.db",
+    "DbName": "",
     "TrainingInputPath": "<Absolute Path>\\Create Custom NER Training Sets\\data\\Train_",
     "TrainingOutputPath": "<Absolute Path>\\Create Custom NER Training Sets\\data",
     "PyPort": 2020,
-    "EntityLabels": [
-        
-    ]
+    "EntityLabels": []
 }
