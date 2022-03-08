@@ -23,7 +23,7 @@
      */
     "frameworks": {
         "ext": {
-            "path":"../lib/extjs-gpl-6.2.0",
+            "path":"../lib/ext-6.2.0",
             "version":"6.2.0.981"
         }
     },
