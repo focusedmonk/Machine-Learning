@@ -15,6 +15,7 @@ CORS(app)
 settings = read_json_file('../Settings.json')
 use_cols = settings['UseCols']
 excel_filename = os.path.basename(settings['ExcelData']).split('.')[0]
+temp_path = os.path.join(settings['TrainingOutputPath'], 'temp')
 db_filename = settings['DbName'] if settings['DbName'] else excel_filename
 if len(use_cols) == 0:
     df = pd.read_excel(settings['ExcelData'], engine='openpyxl', sheet_name=settings['SheetName'])
@@ -30,6 +31,23 @@ table_args.extend(db_cols)
 table_args.append(Column('biluo_annotation', String(), nullable=True))
 table_args.append(Column('non_biluo_annotation', String(), nullable=True))
 annotation = Table(*table_args)
+if not os.path.exists(temp_path):
+    os.makedirs(temp_path)
+
+def is_biluo_valid(biluo_json, unique_id=None):
+    if unique_id is None:
+        unique_id = str(uuid.uuid4())
+    validate_json_file = os.path.join(temp_path, unique_id + '.json')
+    spacy_file = os.path.join(temp_path, unique_id + '.spacy')
+    biluo_json = json.loads(biluo_json)
+    biluo_json['id'] = 0
+    with open(validate_json_file, 'w') as f:
+        f.write(json.dumps([biluo_json]))
+    code = os.system('python -m spacy convert "' + validate_json_file + '" "' + temp_path + '"')
+    if code == 0:
+        os.remove(validate_json_file)
+        os.remove(spacy_file)
+    return True if code == 0 else False
 
 
 @app.route('/')
@@ -69,13 +87,16 @@ def save_annotation():
     unique_id = raw_data['uniqueId']
     biluo_annotation = json.dumps(raw_data['biluoFrmt'])
     non_biluo_annotation = json.dumps(raw_data['nonBiluoFrmt'])
-    sql = (update(annotation).where(annotation.c.unique_id == unique_id).values(
-        biluo_annotation=biluo_annotation,
-        non_biluo_annotation=non_biluo_annotation
-    ))
-    with engine.begin() as conn:
-        conn.execute(sql)
-    return 'Success'
+    if is_biluo_valid(biluo_annotation):
+        sql = (update(annotation).where(annotation.c.unique_id == unique_id).values(
+            biluo_annotation=biluo_annotation,
+            non_biluo_annotation=non_biluo_annotation
+        ))
+        with engine.begin() as conn:
+            conn.execute(sql)
+        return 'Success'
+    else:
+        return 'Failed to save annotation. Likely the problem lies in BILUO format creation.', 500
 
 
 @app.route('/delete_annotation', methods=['POST'])
